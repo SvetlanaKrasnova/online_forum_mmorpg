@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'allauth',
     'allauth.account',
     'django_apscheduler',
+    'django_summernote',
 ]
 
 APSCHEDULER_DATETIME_FORMAT = 'N j, Y, f:s a'
@@ -63,7 +64,18 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'allauth.account.middleware.AccountMiddleware',
 ]
+
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.filebased.FileBasedCache',
+        'LOCATION': os.path.join(BASE_DIR, 'cache_files'),
+        'OPTIONS': {
+                    'MAX_ENTRIES': 100
+                }
+    }
+}
 
 ROOT_URLCONF = 'online_forum_mmorpg.urls'
 
@@ -156,8 +168,10 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
 STATIC_URL = 'static/'
+MEDIA_URL = '/media/'
 
 STATICFILES_DIRS = [BASE_DIR / 'static']
+MEDIA_ROOT = (BASE_DIR / 'media')
 
 LOGIN_URL = 'accounts/login/'
 LOGIN_REDIRECT_URL = '/'
@@ -167,6 +181,14 @@ LOGOUT_REDIRECT_URL = '/accounts/login/'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+SUMMERNOTE_CONFIG = {
+    'attachment_storage_class': 'posts.storage.CkeditorCustomStorage',
+    'summernote': {
+        'width': '1100px',
+        'height': '700px',
+    }
+}
 
 ADMINS = [
     ('admin_mmorpg', os.getenv('EMAIL_ADMIN')),
