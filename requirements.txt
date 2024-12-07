@@ -1,0 +1,14 @@
+django==4.2.15
+django-filter==24.3
+wheel==0.44.0
+django-allauth==65.0.0
+requests==2.32.3
+jwt==1.1.0
+pyjwt==2.9.0
+python-dotenv==1.0.1
+django-apscheduler==0.7.0
+redis==5.1.1
+celery==5.4.0
+Pillow==10.4.0
+django-summernote==0.8.20.0
+ruff==0.8.2
