@@ -1,0 +1,36 @@
+{% url 'profile' as profile %}
+{% url 'basic' as basic %}
+{% url '' as main_page %}
+{% url 'posts' as posts %}
+
+<!-- ***** Header Area Start ***** -->
+<header class="header-area header-sticky">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <nav class="main-nav">
+                    <!-- ***** Logo Start ***** -->
+                    <a href="/" class="logo">
+                        <img src="/static/assets/images/logo2.png" alt="">
+                    </a>
+                    <!-- ***** Logo End ***** -->
+                    <!-- ***** Menu Start ***** -->
+                    <ul class="nav">
+                        {% if request.path != main_page %}
+                            <li><a class="{% if request.path == posts %} active {% endif %}" href="{{ posts }}">Объявления</a></li>
+                        {% endif %}
+                        {% if request.user.is_authenticated %}
+                            <li><a class="{% if request.path == profile %} active {% endif %}" href="{{ profile }}">Профиль</a></li>
+                            <li><a href="{% url 'account_logout' %}">Выход</a></li>
+                        {% endif %}
+                    </ul>
+                    <a class='menu-trigger'>
+                        <span>Menu</span>
+                    </a>
+                    <!-- ***** Menu End ***** -->
+                </nav>
+            </div>
+        </div>
+    </div>
+</header>
+<!-- ***** Header Area End ***** -->

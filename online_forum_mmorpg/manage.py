@@ -5,6 +5,9 @@ import sys
 
 
 def main():
+    if not os.path.exists("cache_files"):
+        os.mkdir("cache_files")
+
     """Run administrative tasks."""
     os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'online_forum_mmorpg.settings')
     try:
