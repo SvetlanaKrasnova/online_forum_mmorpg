@@ -1,0 +1,45 @@
+{% extends "allauth/layouts/base.html" %}
+{% load i18n %}
+
+{% block title %}
+Вход
+{% endblock title %}
+
+{% block content %}
+<div class="discover-items item-details-page">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-10">
+          <div class="section-heading">
+            <div class="line-dec"></div>
+            <h2>В<em>ход</em></h2>
+          </div>
+        </div>
+        <div class="col-lg-7">
+          <form id="contact" action="{% url 'account_login' %}" method="post">
+            {% csrf_token %}
+            {% if redirect_field_value %}
+            <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+            {% endif %}
+              <div class="col-lg-7">
+                <fieldset>
+                  <label for="login">{{form.login.label_tag}}</label>
+                  {{ form.login }}
+                  <label for="password">{{form.password.label_tag}}</label>
+                  {{ form.password }}
+                </fieldset>
+                <div class="buttons">
+                    <div class="main-button">
+                        <a class="button_sign" href="{{ signup_url }}">Регистрация</a>
+                    </div>
+                </div>
+                  <button type="submit" id="form-submit" class="orange-button">Войти</button>
+              </div>
+
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+{% endblock content %}

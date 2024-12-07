@@ -1,0 +1,170 @@
+{% extends 'default.html' %}
+
+{% block title %}
+Профиль
+{% endblock title %}
+
+{% block content %}
+  <!-- ***** Header Area End ***** -->
+  <div class="author-page discover-items">
+    <div class="container">
+      <div class="row">
+		<p></p>
+		<br>
+		<br>
+		<br>
+		<br>
+        <div class="col-lg-6">
+          <div class="author">
+            <img src="/static/assets/images/single-author2.jpg" alt="" style="border-radius: 50%; max-width: 170px;">
+            <h4>{{ request.user.first_name }} {{ request.user.last_name }}
+              <br> <a href="#">{{ request.user.email }}</a>
+              <br><br><a href="#">Изменить фото профиля</a>
+            </h4>
+          </div>
+        </div>
+        <div class="col-lg-6">
+          <div class="right-info">
+            <div class="row">
+              <div class="col-4">
+                <div class="info-item">
+                  <i class="fa fa-chevron-circle-up"></i>
+                  <h6>{{ col_my_comments }} <em>Откликов</em></h6>
+                </div>
+              </div>
+              <div class="col-4">
+                <div class="info-item">
+                  <i class="fa fa-highlighter"></i>
+                  <h6>{{ col_my_trade }} <em>Объявлений</em></h6>
+                </div>
+              </div>
+              <div class="col-4">
+                <div class="info-item">
+                  <i class="fa fa-dollar"></i>
+                  <h6>{{ col_active_trade }} <em>Активные</em></h6>
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+
+              <div class="col-7">
+				<div class="main-button">
+                  <a href="/trade/create">Создать объявление</a>
+                </div>
+                <br>
+				<div class="main-button">
+                  <a href="/profile/reactions">Отклики</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+		<div class="col-lg-5">
+		  <div class="section-heading">
+			<div class="line-dec"></div>
+			<h2><em>О</em>тклики</h2>
+		  </div>
+		</div>
+        <div class="col-lg-7">
+			<p></p>
+			<br>
+			<br>
+			<br>
+          <form id="search-form" name="gs" method="GET" role="search" action="{% url 'reactions_search' %}">
+            <div class="row">
+              <div class="col-lg-4">
+                <fieldset>
+                  {{ filter_tasks.form.title }}
+                </fieldset>
+              </div>
+              <div class="col-lg-3">
+                <fieldset>
+                    {{ filter_tasks.form.category }}
+                </fieldset>
+              </div>
+              <div class="col-lg-3">
+                <fieldset>
+                  {{ filter_tasks.form.type }}
+                </fieldset>
+              </div>
+              <div class="col-lg-2">
+                <fieldset>
+                    <button class="main-button">Поиск</button>
+                </fieldset>
+              </div>
+            </div>
+          </form>
+        </div>
+		<div class="col-lg-11">
+          <div class="item">
+            <div class="row">
+              <div class="col-lg-12">
+                <div class="row">
+                  <div class="col-lg-3 col-sm-6">
+                    <span>Наименование:</span>
+                  </div>
+                  <div class="col-lg-2 col-sm-6">
+                    <span>Дата:</span>
+                  </div>
+                  <div class="col-lg-2 col-sm-6">
+                    <span>Статус:</span>
+                  </div>
+				    <div class="col-lg-3 col-sm-6">
+                    <span>Действие</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+		<div class="col-lg-11">
+          <div class="item">
+            <div class="row">
+              <div class="col-lg-12">
+                <div class="row">
+                  <div class="col-lg-3 col-sm-6">
+                    <span><strong>Объявление 1</strong></span>
+                  </div>
+                  <div class="col-lg-2 col-sm-6">
+                    <span><strong>25th Nov</strong></span>
+                  </div>
+                  <div class="col-lg-2 col-sm-6">
+                    <span><strong>Завершен</strong></span>
+                  </div>
+				  <div class="col-lg-3 col-sm-6">
+						<div class="button">
+						  <a href="create.html">Удалить</a>
+						</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="item">
+            <div class="row">
+              <div class="col-lg-12">
+                <div class="row">
+                  <div class="col-lg-3 col-sm-6">
+                    <span><strong>Объявление 1</strong></span>
+                  </div>
+                  <div class="col-lg-2 col-sm-6">
+                    <span><strong>25th Nov</strong></span>
+                  </div>
+                  <div class="col-lg-2 col-sm-6">
+                    <span><strong>Завершен</strong></span>
+                  </div>
+				  <div class="col-lg-3 col-sm-6">
+						<div class="button">
+						  <a href="create.html">Удалить</a>
+						</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+       </div>
+     </div>
+   </div>
+{% endblock content %}

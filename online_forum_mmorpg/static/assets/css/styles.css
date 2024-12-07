@@ -1,0 +1,21 @@
+.icon::after {
+  content: "";
+  position: absolute;
+  left: 0px;                 /* adujust this value */
+  top: 2px;                  /* adujust this value */
+  width: 2rem;               /* adujust this value */
+  height: 2rem;              /* adujust this value */
+  transform: scale(0);
+  border-radius: 50%;
+  z-index: -1;
+  background-image: linear-gradient(
+    to top right,
+    rgb(25, 68, 255),
+    rgb(0, 162, 255)
+  );
+  transition: all 0.2s ease-out;
+}
+
+.icon:hover::after {
+  transform: scale(1);
+}
