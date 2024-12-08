@@ -1,5 +1,5 @@
 from django.forms import ModelForm, TextInput, CharField, Textarea, Select
-from .models import Post
+from .models import Post, Reply
 from django_summernote.widgets import SummernoteWidget
 
 
@@ -33,4 +33,11 @@ class PostForm(ModelForm):
             'title',
             'description',
             'category',
+        ]
+
+class ReplyForm(ModelForm):
+    class Meta:
+        model = Reply
+        fields = [
+            'text',
         ]

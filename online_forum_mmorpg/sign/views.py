@@ -1,7 +1,7 @@
 from django.views.generic import ListView
 from django.contrib.auth.mixins import LoginRequiredMixin
-from posts.models import Post
-from posts.filters import PostFilter
+from posts.models import Post, Reply
+from posts.filters import ReplyFilter
 
 
 # Create your views here.
@@ -9,31 +9,31 @@ class Profile(LoginRequiredMixin, ListView):
     """
     Страница профиля (личный кабинет)
     """
-    model = Post
+    model = Reply
     ordering = '-create_date'
     template_name = 'profile.html'
-    context_object_name = 'reactions'
+    context_object_name = 'replies'
 
     def get_queryset(self):
         queryset = super().get_queryset()
-        print(self.request.GET)
-        q = self.request.GET.copy()
-        if q.get('type') == "my_reactions":
-            q['type'] = ""
-        print(q)
-        self.filter_posts = PostFilter(q, queryset)  # TODO
-        return self.filter_posts.qs
-
+        queryset.filter(user=self.request.user)
+        # q = self.request.GET.copy()
+        # if q.get('type') == "my_reactions":
+        #     q['type'] = ""
+        # print('q', q)
+        self.filter_replys = ReplyFilter(self.request.GET, queryset)  # TODO
+        return self.filter_replys.qs
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['filter_tasks'] = self.filter_posts
-        context['nike'] = f"@{self.request.user.email.split('@')[0]}"
-
-        context['col_my_reply'] = 0 # TODO Количество откликов пользователя
-        context['col_my_posts'] = 0 # TODO Количество объявлений пользователя
-        context['col_active_posts'] = 0 # TODO Количество не принятых объявлений пользователя
+        context['filter_replys'] = self.filter_replys
+        context['col_my_reply'] = Reply.objects.filter(
+            post__author=self.request.user).count  # Количество откликов пользователя
+        context['col_my_posts'] = Post.objects.filter(
+            author=self.request.user).count  # Количество объявлений пользователя
+        context['col_active_posts'] = 0  # TODO Количество не принятых объявлений пользователя
         return context
+
 
 class MainPage(ListView):
     """

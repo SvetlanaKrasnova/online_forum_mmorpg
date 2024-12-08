@@ -29,19 +29,19 @@
               <div class="col-4">
                 <div class="info-item">
                   <i class="fa fa-chevron-circle-up"></i>
-                  <h6>{{ col_my_comments }} <em>Откликов</em></h6>
+                  <h6>{{ col_my_reply }} <em>Откликов</em></h6>
                 </div>
               </div>
               <div class="col-4">
                 <div class="info-item">
                   <i class="fa fa-highlighter"></i>
-                  <h6>{{ col_my_trade }} <em>Объявлений</em></h6>
+                  <h6>{{ col_my_posts }} <em>Объявлений</em></h6>
                 </div>
               </div>
               <div class="col-4">
                 <div class="info-item">
                   <i class="fa fa-dollar"></i>
-                  <h6>{{ col_active_trade }} <em>Активные</em></h6>
+                  <h6>{{ col_active_posts }} <em>Активные</em></h6>
                 </div>
               </div>
             </div>
@@ -50,12 +50,12 @@
 
               <div class="col-7">
 				<div class="main-button">
-                  <a href="/trade/create">Создать объявление</a>
+                  <a href="{% url 'create_post' %}">Создать объявление</a>
                 </div>
                 <br>
-				<div class="main-button">
-                  <a href="/profile/reactions">Отклики</a>
-                </div>
+<!--				<div class="main-button">-->
+<!--                  <a href="/profile/reactions">Отклики</a>-->
+<!--                </div>-->
               </div>
             </div>
           </div>
@@ -75,17 +75,17 @@
             <div class="row">
               <div class="col-lg-4">
                 <fieldset>
-                  {{ filter_tasks.form.title }}
+                  {{ filter_replys.form.text }}
                 </fieldset>
               </div>
               <div class="col-lg-3">
                 <fieldset>
-                    {{ filter_tasks.form.category }}
+                    {{ filter_replys.form.status }}
                 </fieldset>
               </div>
               <div class="col-lg-3">
                 <fieldset>
-                  {{ filter_tasks.form.type }}
+                  {{ filter_replys.form.type }}
                 </fieldset>
               </div>
               <div class="col-lg-2">
@@ -119,6 +119,30 @@
           </div>
         </div>
 		<div class="col-lg-11">
+          {% for reply in replies %}
+          <div class="item">
+            <div class="row">
+              <div class="col-lg-12">
+                <div class="row">
+                  <div class="col-lg-3 col-sm-6">
+                    <span><strong>{{ reply.post__title }}</strong></span>
+                  </div>
+                  <div class="col-lg-2 col-sm-6">
+                    <span><strong>{{ reply.create_date|date:'l d, M' }}</strong></span>
+                  </div>
+                  <div class="col-lg-2 col-sm-6">
+                    <span><strong>{{ reply.status }}</strong></span>
+                  </div>
+				  <div class="col-lg-3 col-sm-6">
+                    <div class="button">
+                      <a href="">Удалить</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          {% endfor %}
           <div class="item">
             <div class="row">
               <div class="col-lg-12">
@@ -133,9 +157,9 @@
                     <span><strong>Завершен</strong></span>
                   </div>
 				  <div class="col-lg-3 col-sm-6">
-						<div class="button">
-						  <a href="create.html">Удалить</a>
-						</div>
+                    <div class="button">
+                      <a href="create.html">Удалить</a>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -155,9 +179,9 @@
                     <span><strong>Завершен</strong></span>
                   </div>
 				  <div class="col-lg-3 col-sm-6">
-						<div class="button">
-						  <a href="create.html">Удалить</a>
-						</div>
+                    <div class="button">
+                      <a href="create.html">Удалить</a>
+                    </div>
                   </div>
                 </div>
               </div>

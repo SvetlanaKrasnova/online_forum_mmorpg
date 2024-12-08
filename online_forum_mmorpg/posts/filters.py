@@ -1,6 +1,6 @@
 from django_filters import FilterSet, CharFilter, DateFilter, ChoiceFilter
 from django.forms import Select, TextInput, DateInput
-from posts.models import Post
+from posts.models import Post, Reply
 
 
 class PostFilter(FilterSet):
@@ -72,4 +72,17 @@ class PostFilter(FilterSet):
                   'author',
                   'category',
                   'type',
+                  ]
+
+class ReplyFilter(FilterSet):
+    """
+    Фильтр для поиска откликов
+    """
+
+    class Meta:
+        model = Reply
+        fields = ['post__author',
+                  'text',
+                  'create_date',
+                  'status',
                   ]
