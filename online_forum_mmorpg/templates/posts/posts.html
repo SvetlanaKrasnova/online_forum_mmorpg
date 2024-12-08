@@ -1,0 +1,72 @@
+{% extends 'default.html' %}
+{% load custom_filters %}
+
+{% block title %}
+Объявления
+{% endblock title %}
+
+{% block content %}
+  <div class="discover-items">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-5">
+          <div class="section-heading">
+            <div class="line-dec"></div>
+            <h2><em>О</em>бъявления</h2>
+          </div>
+        </div>
+        <div class="col-lg-7">
+          <form id="search-form" name="gs" method="GET" role="search" action="{% url 'search_posts' %}">
+            <div class="row">
+              <div class="col-lg-6">
+                <fieldset>
+                    {{ filter_posts.form.title }}
+                </fieldset>
+              </div>
+              <div class="col-lg-3">
+                <fieldset>
+                    {{ filter_posts.form.category }}
+                </fieldset>
+              </div>
+              <div class="col-lg-2">
+                <fieldset>
+                    <button class="main-button">Поиск</button>
+                </fieldset>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="currently-market">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-11">
+          {% for post in posts %}
+            <div class="item">
+              <div class="right-content">
+                <h4>{{ post.title }} ({{ post.create_date|date:'l d, M' }})</h4>
+                <span class="author">
+                  <img src="/static/assets/images/author.jpg" alt="" style="max-width: 50px; border-radius: 50%;">
+                  <h6>{{ post.author.first_name }} {{ post.author.last_name }}<br><a href="#">@{{ request.user.email|get_nike }}</a></h6>
+                </span>
+                <div class="line-dec"></div>
+                <span class="bid">
+                  {{ post.description|truncatechars:90 }}
+                </span>
+                <span class="ends">
+                <div class="main-button">
+                  <a href="/posts/{{ post.id }}">Подробнее</a>
+                    <a href="/posts/{{ post.id }}/create_reply">Откликнуться</a>
+                </div>
+                </span>
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock content %}

@@ -1,0 +1,53 @@
+{% extends 'default.html' %}
+
+{% block title %}
+Создание объявления
+{% endblock title %}
+
+{% block content %}
+  <div class="discover-items item-details-page">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="section-heading">
+            <div class="line-dec"></div>
+            <h2>Создание <em>объявления</em></h2>
+          </div>
+        </div>
+        <div class="col-lg-12">
+          <form id="contact" action="" method="post">
+            {% csrf_token %}
+            {{ form.media }}
+            <div class="row">
+              <div class="col-lg-4">
+                <fieldset>
+                  <label for="title">{{form.title.label_tag}}</label>
+                  <input name="title" id="title" placeholder="" autocomplete="on" required>
+                </fieldset>
+              </div>
+			  <div class="col-lg-3">
+                <fieldset>
+                  <label for="category">{{form.category.label_tag}}</label>
+                  <fieldset>{{form.category}}</fieldset>
+                </fieldset>
+              </div>
+              <div>
+                <fieldset>
+                  <label for="description">{{form.description.label_tag}}</label>
+                  {{ form.description }}
+                </fieldset>
+              </div>
+			  <div class="col-lg-4">
+				<br>
+              </div>
+              <div class="col-lg-5">
+                  <button type="submit" id="form-submit" class="orange-button">Опубликовать</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+{% endblock content %}
