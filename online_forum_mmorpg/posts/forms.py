@@ -1,4 +1,4 @@
-from django.forms import ModelForm, TextInput, CharField, Textarea, Select
+from django.forms import ModelForm, TextInput, CharField, Select
 from .models import Post, Reply
 from django_summernote.widgets import SummernoteWidget
 
@@ -8,8 +8,6 @@ class PostForm(ModelForm):
         label='Наименовние',
         widget=TextInput(
             attrs={'type': 'text',
-                   # 'class': "form-control form_field_post",
-                   # 'placeholder': "Наименование объявления",
                    },
         ),
     )
@@ -35,9 +33,37 @@ class PostForm(ModelForm):
             'category',
         ]
 
+
 class ReplyForm(ModelForm):
+    """
+    Для записи нового отклика на странице с откликами
+    """
     class Meta:
         model = Reply
         fields = [
             'text',
+        ]
+
+
+class ReplyChengeStatusForm(ModelForm):
+    """
+    Для принятия/отклонения статуса на личной страничке пользователя
+    """
+    status = CharField(
+        initial="default",
+        widget=Select(
+            choices=[
+                ('approved', "Принять"),
+                ("rejected", "Отклонить"),
+                ("delete", "Удалить"),
+                ("default", "Не выбрано"),
+            ],
+            attrs={"class": "form-select"},
+        ),
+    )
+
+    class Meta:
+        model = Reply
+        fields = [
+            'status',
         ]

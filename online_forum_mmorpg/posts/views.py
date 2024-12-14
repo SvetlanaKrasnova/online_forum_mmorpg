@@ -1,8 +1,8 @@
 from django.core.cache import cache
 from django.shortcuts import redirect
-from django.views.generic import ListView, CreateView, DetailView, DeleteView
+from django.views.generic import ListView, CreateView, DetailView
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
-from .models import Post, Reply
+from .models import Post
 from .forms import PostForm, ReplyForm
 from .filters import PostFilter
 
@@ -23,7 +23,7 @@ class PostList(ListView):
         :return:
         """
         queryset = super().get_queryset()
-        self.filter_posts = PostFilter(self.request.GET, queryset)  # TODO
+        self.filter_posts = PostFilter(self.request.GET, queryset)
         return self.filter_posts.qs
 
     def get_context_data(self, **kwargs):
@@ -70,7 +70,6 @@ class PostDetail(LoginRequiredMixin, DetailView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['form'] = ReplyForm()
         return context
 
     def get_object(self, *args, **kwargs):

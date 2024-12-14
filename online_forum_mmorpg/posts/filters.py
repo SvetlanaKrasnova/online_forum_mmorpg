@@ -1,5 +1,5 @@
-from django_filters import FilterSet, CharFilter, DateFilter, ChoiceFilter
-from django.forms import Select, TextInput, DateInput
+from django_filters import FilterSet, CharFilter, ChoiceFilter
+from django.forms import Select, TextInput
 from posts.models import Post, Reply
 
 
@@ -21,17 +21,6 @@ class PostFilter(FilterSet):
         ),
     )
 
-    type = ChoiceFilter(
-        field_name='author',
-        label='Поиск по типу объявления',
-        choices=[
-        ('my_reactions', 'Мои'),
-        ('reactions', 'Пользователей'),
-            ],
-        widget=Select(
-            attrs={"class": "form-control"},
-        ),
-    )
     category = ChoiceFilter(
         field_name='category',
         label='Поиск по категории объявления',
@@ -55,29 +44,42 @@ class PostFilter(FilterSet):
         ),
     )
 
-    # create_date__gt = DateFilter(
-    #     field_name="create_date",
-    #     label="От даты",
-    #     lookup_expr='gt',
-    #     widget=DateInput(
-    #         attrs={'type': 'date',
-    #                'class': "form-control",
-    #                },
-    #     ),
-    # )
-
     class Meta:
         model = Post
         fields = ['title',
                   'author',
                   'category',
-                  'type',
                   ]
+
 
 class ReplyFilter(FilterSet):
     """
     Фильтр для поиска откликов
     """
+    status = ChoiceFilter(
+        field_name='status',
+        label='Поиск по статусам откликов',
+        choices=[
+            ('approved', "Принятые"),
+            ("rejected", "Отклоненные"),
+            ("new", "Новые"),
+        ],
+        widget=Select(
+            attrs={"class": "form-control"},
+        ),
+    )
+
+    type = ChoiceFilter(
+        field_name='author',
+        label='Поиск по типу отклика',
+        choices=[
+            ('my_reactions', 'Оставленные мной'),
+            ('reactions', 'Пользователей'),
+        ],
+        widget=Select(
+            attrs={"class": "form-control"},
+        ),
+    )
 
     class Meta:
         model = Reply
@@ -85,4 +87,5 @@ class ReplyFilter(FilterSet):
                   'text',
                   'create_date',
                   'status',
+                  'type',
                   ]

@@ -29,7 +29,7 @@
               <div class="col-4">
                 <div class="info-item">
                   <i class="fa fa-chevron-circle-up"></i>
-                  <h6>{{ col_my_reply }} <em>Откликов</em></h6>
+                  <h6>{{ replies.count }} <em>Откликов</em></h6>
                 </div>
               </div>
               <div class="col-4">
@@ -45,17 +45,12 @@
                 </div>
               </div>
             </div>
-
             <div class="row">
-
               <div class="col-7">
 				<div class="main-button">
                   <a href="{% url 'create_post' %}">Создать объявление</a>
                 </div>
                 <br>
-<!--				<div class="main-button">-->
-<!--                  <a href="/profile/reactions">Отклики</a>-->
-<!--                </div>-->
               </div>
             </div>
           </div>
@@ -66,12 +61,14 @@
 			<h2><em>О</em>тклики</h2>
 		  </div>
 		</div>
+        {% if replies %}
         <div class="col-lg-7">
 			<p></p>
 			<br>
 			<br>
 			<br>
           <form id="search-form" name="gs" method="GET" role="search" action="{% url 'reactions_search' %}">
+            {% csrf_token %}
             <div class="row">
               <div class="col-lg-4">
                 <fieldset>
@@ -96,19 +93,21 @@
             </div>
           </form>
         </div>
+        {% endif %}
+        {% if replies %}
 		<div class="col-lg-11">
           <div class="item">
             <div class="row">
               <div class="col-lg-12">
                 <div class="row">
                   <div class="col-lg-3 col-sm-6">
-                    <span>Наименование:</span>
+                    <span>На объявление</span>
                   </div>
                   <div class="col-lg-2 col-sm-6">
-                    <span>Дата:</span>
+                    <span>Дата</span>
                   </div>
-                  <div class="col-lg-2 col-sm-6">
-                    <span>Статус:</span>
+                  <div class="col-lg-3 col-sm-6">
+                    <span>Статус</span>
                   </div>
 				    <div class="col-lg-3 col-sm-6">
                     <span>Действие</span>
@@ -118,75 +117,63 @@
             </div>
           </div>
         </div>
+        {% endif %}
 		<div class="col-lg-11">
           {% for reply in replies %}
+          <form id="change_status_reply" method="POST">
           <div class="item">
             <div class="row">
               <div class="col-lg-12">
                 <div class="row">
                   <div class="col-lg-3 col-sm-6">
-                    <span><strong>{{ reply.post__title }}</strong></span>
+                    <span><strong><a href="/posts/{{ reply.post.id }}">{{ reply.post }}</a></strong></span>
                   </div>
                   <div class="col-lg-2 col-sm-6">
-                    <span><strong>{{ reply.create_date|date:'l d, M' }}</strong></span>
+                    <span><strong>{{ reply.create_date|date:'d.m.Y' }}</strong></span>
                   </div>
                   <div class="col-lg-2 col-sm-6">
                     <span><strong>{{ reply.status }}</strong></span>
                   </div>
-				  <div class="col-lg-3 col-sm-6">
-                    <div class="button">
-                      <a href="">Удалить</a>
+				  <div id="selector" class="col-lg-3 col-sm-6">
+                    {% if reply.status == 'new' %}
+                    {{ form_chenge_status_reply.status }}
+                    {% csrf_token %}
+<!--                    <fieldset>-->
+<!--                      <select name="status_reply" class="form-select" id="id_status">-->
+<!--                        <option value="approved">Принять</option>-->
+<!--                        <option value="rejected">Отклонить</option>-->
+<!--                        <option value="remove">Удалить</option>-->
+<!--                        <option value="default" selected="">Не выбрано</option>-->
+<!--                      </select>-->
+<!--                    </fieldset>-->
+                    {% else %}
+                      <span></span>
+                    {% endif %}
+                  </div>
+                  {% if reply.status == 'new' %}
+                    <div class="col-lg-2 col-sm-6">
+                      <input type="hidden" value="{{ reply.id }}" name="id_reply">
+                      <button type="submit">Применить</button>
                     </div>
+                  {% endif %}
+                </div>
+              </div>
+            </div>
+          </div>
+          </form>
+          {% empty %}
+          <div class="item">
+            <div class="row">
+              <div class="col-lg-12">
+                <div class="row">
+                  <div class="col-lg-3 col-sm-10">
+                    <span><strong>У вас пока нет откликов</strong></span>
                   </div>
                 </div>
               </div>
             </div>
           </div>
           {% endfor %}
-          <div class="item">
-            <div class="row">
-              <div class="col-lg-12">
-                <div class="row">
-                  <div class="col-lg-3 col-sm-6">
-                    <span><strong>Объявление 1</strong></span>
-                  </div>
-                  <div class="col-lg-2 col-sm-6">
-                    <span><strong>25th Nov</strong></span>
-                  </div>
-                  <div class="col-lg-2 col-sm-6">
-                    <span><strong>Завершен</strong></span>
-                  </div>
-				  <div class="col-lg-3 col-sm-6">
-                    <div class="button">
-                      <a href="create.html">Удалить</a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="item">
-            <div class="row">
-              <div class="col-lg-12">
-                <div class="row">
-                  <div class="col-lg-3 col-sm-6">
-                    <span><strong>Объявление 1</strong></span>
-                  </div>
-                  <div class="col-lg-2 col-sm-6">
-                    <span><strong>25th Nov</strong></span>
-                  </div>
-                  <div class="col-lg-2 col-sm-6">
-                    <span><strong>Завершен</strong></span>
-                  </div>
-				  <div class="col-lg-3 col-sm-6">
-                    <div class="button">
-                      <a href="create.html">Удалить</a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
         </div>
        </div>
      </div>
