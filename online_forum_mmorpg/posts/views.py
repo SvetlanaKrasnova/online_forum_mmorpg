@@ -29,6 +29,7 @@ class PostList(ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['filter_posts'] = self.filter_posts
+        print('request.path', self.request.path)
         return context
 
 

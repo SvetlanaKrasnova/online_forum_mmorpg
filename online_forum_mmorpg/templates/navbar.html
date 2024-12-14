@@ -1,7 +1,7 @@
 {% url 'profile' as profile %}
 {% url 'basic' as basic %}
-{% url '' as main_page %}
-{% url 'posts' as posts %}
+{% url 'posts_portal' as posts %}
+{% url 'news_portal' as news %}
 
 <!-- ***** Header Area Start ***** -->
 <header class="header-area header-sticky">
@@ -16,10 +16,11 @@
                     <!-- ***** Logo End ***** -->
                     <!-- ***** Menu Start ***** -->
                     <ul class="nav">
-                        {% if request.path != main_page %}
-                            <li><a class="{% if request.path == posts %} active {% endif %}" href="{{ posts }}">Объявления</a></li>
+                        {% if request.path != '/' %}
+                            <li><a class="{% if request.path == news %} active {% endif %}" href="{{ news }}">Новости</a></li>
                         {% endif %}
                         {% if request.user.is_authenticated %}
+                            <li><a class="{% if request.path == posts %} active {% endif %}" href="{{ posts }}">Объявления</a></li>
                             <li><a class="{% if request.path == profile %} active {% endif %}" href="{{ profile }}">Профиль</a></li>
                             <li><a href="{% url 'account_logout' %}">Выход</a></li>
                         {% endif %}

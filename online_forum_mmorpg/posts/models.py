@@ -27,11 +27,15 @@ class Post(models.Model):
                                 choices=CATEGORIES)
     author = models.ForeignKey(User, on_delete=models.CASCADE)
 
+    class Meta:
+        verbose_name = "Объявление"
+        verbose_name_plural = "Объявления"
+
     def __str__(self):
         return self.title.title()
 
     def get_absolute_url(self):
-        return reverse('post_detail', args=[str(self.id)])
+        return reverse('detail_post', args=[str(self.id)])
 
 
 class Reply(models.Model):

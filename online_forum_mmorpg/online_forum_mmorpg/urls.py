@@ -28,6 +28,7 @@ urlpatterns = [
     path('', MainPage.as_view(), name='basic'),
     path('sign/', include('sign.urls')),
     path('posts/', include('posts.urls')),
+    path('news/', include('news.urls')),
 ]
 
 if settings.DEBUG:

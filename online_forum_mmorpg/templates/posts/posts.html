@@ -2,7 +2,7 @@
 {% load custom_filters %}
 
 {% block title %}
-Объявления
+Просмотр {{ request.get_full_path|get_title }}
 {% endblock title %}
 
 {% block content %}
@@ -12,11 +12,12 @@
         <div class="col-lg-5">
           <div class="section-heading">
             <div class="line-dec"></div>
-            <h2><em>О</em>бъявления</h2>
+            <h2>{{ request.get_full_path|get_title:"True" }}</h2>
           </div>
         </div>
         <div class="col-lg-7">
-          <form id="search-form" name="gs" method="GET" role="search" action="{% url 'search_posts' %}">
+<!--          <form id="search-form" name="gs" method="GET" role="search" action="{% url 'search_posts' %}">-->
+          <form id="search-form" name="gs" method="GET" role="search" action="{% if 'post' in request.path %} {% url 'search_posts' %} {% else %} {% url 'search_news' %} {% endif %}">
             <div class="row">
               <div class="col-lg-6">
                 <fieldset>
@@ -25,7 +26,11 @@
               </div>
               <div class="col-lg-3">
                 <fieldset>
+                  {% if filter_posts.form.category %}
                     {{ filter_posts.form.category }}
+                  {% else %}
+                    {{ filter_posts.form.create_date__gt }}
+                  {% endif %}
                 </fieldset>
               </div>
               <div class="col-lg-2">
@@ -50,16 +55,22 @@
                 <h4>{{ post.title }} ({{ post.create_date|date:'l d, M' }})</h4>
                 <span class="author">
                   <img src="/static/assets/images/author.jpg" alt="" style="max-width: 50px; border-radius: 50%;">
-                  <h6>{{ post.author.first_name }} {{ post.author.last_name }}<br><a href="#">@{{ request.user.email|get_nike }}</a></h6>
+                  <h6>{{ post.author.first_name }} {{ post.author.last_name }}<br><a>@{{ request.user.email|get_nike }}</a></h6>
                 </span>
                 <div class="line-dec"></div>
                 <span class="bid">
-                  {{ post.description|truncatechars:90 }}
+                  {% if post.description %}
+                    {{ post.description|truncatechars:90 }}
+                  {% else %}
+                    {{ post.text|truncatechars:90 }}
+                  {% endif %}
                 </span>
                 <span class="ends">
                 <div class="main-button">
-                  <a href="/posts/{{ post.id }}">Подробнее</a>
-                    <a href="/posts/{{ post.id }}/create_reply">Откликнуться</a>
+                  <a href="{{ post.get_absolute_url }}">Подробнее</a>
+                  {% if 'post' in request.path %}
+                    <a href="{{ post.get_absolute_url }}/create_reply">Откликнуться</a>
+                  {% endif %}
                 </div>
                 </span>
               </div>

@@ -2,7 +2,7 @@
 {% load custom_filters %}
 
 {% block title %}
-Просмотр объявления
+Просмотр {{ request.get_full_path|get_title }}
 {% endblock title %}
 
 {% block content %}
@@ -23,12 +23,17 @@
               <h6>Автор: {{ post.author.first_name }} {{ post.author.last_name }} <a href="#">{{ post.author.email|get_nike }}</a></h6>
             </span>
             <div class="line-dec"></div>
-            <span class="bid">
-              {{ post.description|safe }}
+            <span class="bid" style="color: #fff">
+                {% if post.description %}
+                    {{ post.description|safe }}
+                {% else %}
+                    {{ post.text|safe }}
+                {% endif %}
             </span>
           </div>
         </div>
         {% if request.user.is_authenticated %}
+          {% if 'post' in request.get_full_path %}
             <form method="POST" role="search">
                 {% csrf_token %}
                 <div id="contact" class="item" style="margin-top: 0px; padding: 30px 30px; width: 100%; max-width: 100%">
@@ -36,13 +41,13 @@
                       <strong>О</strong>ставить отклик<br>
                     </span>
                     <div class="line-dec"></div>
-                    {{ form.text }}
-<!--                    <textarea name="title" placeholder="" autocomplete="on" required style="border-radius: 10px;"> </textarea>-->
+                    <textarea name="text" placeholder="Оставить отклик..." autocomplete="on" required style="border-radius: 10px;"> </textarea>
                   <span class="ends">
                     <button type="submit" id="form-submit" class="orange-button">Опубликовать</button>
                   </span>
                 </div>
             </form>
+          {% endif %}
           {% else %}
             <div id="contact" class="item" style="margin-top: 0px; padding: 30px 30px; width: 100%; max-width: 100%">
                 <span class="bid">

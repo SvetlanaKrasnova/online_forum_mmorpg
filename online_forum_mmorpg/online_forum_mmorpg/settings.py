@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'django_filters',
     'posts',
     'sign',
+    'news',
     'allauth',
     'allauth.account',
     'django_apscheduler',
@@ -66,6 +67,14 @@ EMAIL_ADMIN = os.getenv('EMAIL_ADMIN')
 
 SITE_ID = 1
 SITE_URL = f'http://127.0.0.1:8000'
+
+CELERY_BROKER_URL = f'redis://127.0.0.1:6379'
+CELERY_RESULT_BACKEND = 'redis://127.0.0.1:6379'
+REDIS_BROKER_HOST = '127.0.0.1'
+REDIS_BROKER_PORT = '6379'
+CELERY_ACCEPT_CONTENT = ['application/json']
+CELERY_TASK_SERIALIZER = 'json'
+CELERY_RESULT_SERIALIZER = 'json'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -194,7 +203,7 @@ LOGOUT_REDIRECT_URL = '/accounts/login/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 SUMMERNOTE_CONFIG = {
-    'attachment_storage_class': 'posts.storage.CkeditorCustomStorage',
+    'attachment_storage_class': 'online_forum_mmorpg.storage.CkeditorCustomStorage',
     'summernote': {
         'width': '1100px',
         'height': '700px',

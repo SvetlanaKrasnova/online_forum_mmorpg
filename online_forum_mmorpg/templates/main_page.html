@@ -16,7 +16,7 @@
             <p>Liberty NFT Market is a really cool and professional design for your NFT websites. This HTML CSS template is based on Bootstrap v5 and it is designed for NFT related web portals. Liberty can be freely downloaded from TemplateMo's free css templates.</p>
             <div class="buttons">
               <div class="main-button">
-                <a href="/posts">Читать объявления</a>
+                <a href="{% url 'news_portal' %}">Читать новости</a>
                 {% if not request.user.is_authenticated %}
                   <a href="/accounts/login">Вход</a>
                 {% endif %}
@@ -38,7 +38,7 @@
               <div class="col-lg-12">
                 <div class="section-heading">
                   <div class="line-dec"></div>
-                  <h2><em>П</em>оследние объявления</h2>
+                  <h2><em>П</em>оследние новости</h2>
                 </div>
               </div>
               <div class="col-lg-12">
