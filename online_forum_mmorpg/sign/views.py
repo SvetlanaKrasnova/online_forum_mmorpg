@@ -46,7 +46,9 @@ class Profile(LoginRequiredMixin, ListView):
         elif status == 'default':
             pass
         else:
-            Reply.objects.filter(id=id_reply).update(status=request.POST.get("status"))
+            r = Reply.objects.get(id=id_reply)
+            r.status = status
+            r.save()
 
         return redirect('profile')
 

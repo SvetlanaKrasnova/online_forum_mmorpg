@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Уведомление</title>
+</head>
+<body>
+    <div>
+        {% if update_reply %}
+            <p>{{ recipient_reply }} принял ваш отклик от {{ date_reply }}</p>
+            <p>Текст отклика: "<i>{{ text_reply }}</i>"</p>
+        {% else%}
+            <p>Получен новый отклик на ваше объявление "{{ post_title }}" от {{ date_post }}.</p>
+            <p>Посмотреть отклик можно в личном кабинете.</p>
+        {% endif %}
+    </div>
+</body>
+</html>
