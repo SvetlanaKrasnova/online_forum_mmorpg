@@ -14,6 +14,23 @@
 		<br>
 		<br>
 		<br>
+                <div class="row">
+          <div class="col-lg-7">
+              <div class="main-button">
+                <a href="#" onclick="viewContent('my_posts', 'my_replies')">Мои объявления</a>
+                <a href="#" onclick="viewContent('my_replies', 'my_posts')">Мои отклики</a>
+                <a href="{% url 'create_post' %}">Создать объявление</a>
+              </div>
+          </div>
+        </div>
+                <div class="row">
+          <div class="col-lg-4">
+            <div class="section-heading">
+              <h2></h2>
+            </div>
+          </div>
+          <div class="col-lg-7"></div>
+        </div>
         <div class="col-lg-6">
           <div class="author">
             <img src="/static/assets/images/single-author2.jpg" alt="" style="border-radius: 50%; max-width: 170px;">
@@ -29,7 +46,7 @@
               <div class="col-4">
                 <div class="info-item">
                   <i class="fa fa-chevron-circle-up"></i>
-                  <h6>{{ replies.count }} <em>Откликов</em></h6>
+                  <h6>{{ col_my_reply }} <em>Откликов</em></h6>
                 </div>
               </div>
               <div class="col-4">
@@ -45,136 +62,18 @@
                 </div>
               </div>
             </div>
-            <div class="row">
-              <div class="col-7">
-				<div class="main-button">
-                  <a href="{% url 'create_post' %}">Создать объявление</a>
-                </div>
-                <br>
-              </div>
-            </div>
           </div>
         </div>
-		<div class="col-lg-5">
-		  <div class="section-heading">
-			<div class="line-dec"></div>
-			<h2><em>О</em>тклики</h2>
-		  </div>
-		</div>
-        {% if replies %}
-        <div class="col-lg-7">
-			<p></p>
-			<br>
-			<br>
-			<br>
-          <form id="search-form" name="gs" method="GET" role="search" action="{% url 'reactions_search' %}">
-            {% csrf_token %}
-            <div class="row">
-              <div class="col-lg-4">
-                <fieldset>
-                  {{ filter_replys.form.text }}
-                </fieldset>
-              </div>
-              <div class="col-lg-3">
-                <fieldset>
-                    {{ filter_replys.form.status }}
-                </fieldset>
-              </div>
-              <div class="col-lg-3">
-                <fieldset>
-                  {{ filter_replys.form.type }}
-                </fieldset>
-              </div>
-              <div class="col-lg-2">
-                <fieldset>
-                    <button class="main-button">Поиск</button>
-                </fieldset>
-              </div>
-            </div>
-          </form>
-        </div>
-        {% endif %}
-        {% if replies %}
-		<div class="col-lg-11">
-          <div class="item">
-            <div class="row">
-              <div class="col-lg-12">
-                <div class="row">
-                  <div class="col-lg-3 col-sm-6">
-                    <span>На объявление</span>
-                  </div>
-                  <div class="col-lg-2 col-sm-6">
-                    <span>Дата</span>
-                  </div>
-                  <div class="col-lg-3 col-sm-6">
-                    <span>Статус</span>
-                  </div>
-				    <div class="col-lg-3 col-sm-6">
-                    <span>Действие</span>
-                  </div>
-                </div>
-              </div>
+        <div class="row">
+          <div class="col-lg-4">
+            <div class="section-heading">
+              <h2></h2>
             </div>
           </div>
+          <div class="col-lg-7"></div>
         </div>
-        {% endif %}
-		<div class="col-lg-11">
-          {% for reply in replies %}
-          <form id="change_status_reply" method="POST">
-          <div class="item">
-            <div class="row">
-              <div class="col-lg-12">
-                <div class="row">
-                  <div class="col-lg-3 col-sm-6">
-                    <span><strong><a href="/posts/{{ reply.post.id }}">{{ reply.post }}</a></strong></span>
-                  </div>
-                  <div class="col-lg-2 col-sm-6">
-                    <span><strong>{{ reply.create_date|date:'d.m.Y' }}</strong></span>
-                  </div>
-                  <div class="col-lg-2 col-sm-6">
-                    <span><strong>{{ reply.status }}</strong></span>
-                  </div>
-				  <div id="selector" class="col-lg-3 col-sm-6">
-                    {% if reply.status == 'new' %}
-                    {{ form_chenge_status_reply.status }}
-                    {% csrf_token %}
-<!--                    <fieldset>-->
-<!--                      <select name="status_reply" class="form-select" id="id_status">-->
-<!--                        <option value="approved">Принять</option>-->
-<!--                        <option value="rejected">Отклонить</option>-->
-<!--                        <option value="remove">Удалить</option>-->
-<!--                        <option value="default" selected="">Не выбрано</option>-->
-<!--                      </select>-->
-<!--                    </fieldset>-->
-                    {% else %}
-                      <span></span>
-                    {% endif %}
-                  </div>
-                  {% if reply.status == 'new' %}
-                    <div class="col-lg-2 col-sm-6">
-                      <input type="hidden" value="{{ reply.id }}" name="id_reply">
-                      <button type="submit">Применить</button>
-                    </div>
-                  {% endif %}
-                </div>
-              </div>
-            </div>
-          </div>
-          </form>
-          {% empty %}
-          <div class="item">
-            <div class="row">
-              <div class="col-lg-12">
-                <div class="row">
-                  <div class="col-lg-3 col-sm-10">
-                    <span><strong>У вас пока нет откликов</strong></span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          {% endfor %}
-        </div>
+        {% include "profile_my_replies.html" %}
+        {% include "profile_my_posts.html" %}
        </div>
      </div>
    </div>

@@ -19,29 +19,29 @@ class Profile(LoginRequiredMixin, ListView):
 
     def get_queryset(self):
         queryset = super().get_queryset()
-        queryset.filter(user=self.request.user)
-        # q = self.request.GET.copy()
-        # if q.get('type') == "my_reactions":
-        #     q['type'] = ""
-        # print('q', q)
-        self.filter_replys = ReplyFilter(self.request.GET, queryset.filter(user=self.request.user))  # TODO
+        self.filter_replys = ReplyFilter(self.request.GET, queryset.filter(post__author=self.request.user))  # TODO
         return self.filter_replys.qs
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['filter_replys'] = self.filter_replys
         context['form_chenge_status_reply'] = ReplyChengeStatusForm()
-        context['col_my_reply'] = Reply.objects.filter(
-            post__author=self.request.user).count  # Количество откликов пользователя
-        context['col_my_posts'] = Post.objects.filter(
-            author=self.request.user).count  # Количество объявлений пользователя
-        context['col_active_posts'] = 0  # TODO Количество не принятых объявлений пользователя
+
+        # Количество откликов пользователя
+        context['col_my_reply'] = Reply.objects.filter(user=self.request.user).count
+
+        # Количество объявлений пользователя
+        my_posts = Post.objects.filter(author=self.request.user)
+        context['col_my_posts'] = my_posts.count
+        context['col_active_posts'] = Reply.objects.filter(status='new', post__author=self.request.user).count
+
+        context['my_posts'] = my_posts
         return context
 
     def post(self, request, *args, **kwargs):
-        status = request.POST.get("status")
+        status = request.POST.get("status_reply")
         id_reply = request.POST.get("id_reply")
-        if status == 'delete':
+        if status == 'remove':
             Reply.objects.get(id=id_reply).delete()
         elif status == 'default':
             pass
@@ -60,8 +60,3 @@ class MainPage(ListView):
     model = Post
     template_name = 'main_page.html'
     context_object_name = 'news'
-    paginate_by = 10
-
-    def get_context_data(self, **kwargs):
-        print('request.user:', self.request.user.is_authenticated)
-        print('request.path:', self.request.path)

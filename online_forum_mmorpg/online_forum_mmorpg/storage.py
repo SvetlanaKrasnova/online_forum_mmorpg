@@ -15,7 +15,6 @@ class CkeditorCustomStorage(FileSystemStorage):
     def _save(self, name, content):
         folder_name = self.get_folder_name()
         name = os.path.join(folder_name, name)
-        print('name_save_file:', name)
         return super()._save(name, content)
 
     location = os.path.join(settings.MEDIA_ROOT, 'uploads/')

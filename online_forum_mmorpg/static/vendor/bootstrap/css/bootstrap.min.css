@@ -959,6 +959,11 @@ progress {
   .col-sm-6 {
     flex: 0 0 auto;
     width: 50%;
+    text-align: center;
+  }
+
+  .col-sm-6 span {
+    margin-top: 11px;
   }
 
   .col-sm-7 {
@@ -9558,7 +9563,7 @@ textarea.form-control-lg {
     margin-left: 3rem !important;
   }
 
-  .mx-lg-auto {
+  .mx-lg-auto, .mx-lg-auto span  {
     margin-right: auto !important;
     margin-left: auto !important;
   }

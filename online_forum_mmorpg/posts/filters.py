@@ -69,23 +69,33 @@ class ReplyFilter(FilterSet):
         ),
     )
 
-    type = ChoiceFilter(
-        field_name='author',
-        label='Поиск по типу отклика',
-        choices=[
-            ('my_reactions', 'Оставленные мной'),
-            ('reactions', 'Пользователей'),
-        ],
-        widget=Select(
-            attrs={"class": "form-control"},
+    post_title = CharFilter(
+        field_name='post__title',
+        label='Поиск отклика по объявлению',
+        lookup_expr='icontains',
+        widget=TextInput(
+            attrs={'type': 'text',
+                   'class': "form-control",
+                   'placeholder': "По тексту объявления...",
+                   },
+        ),
+    )
+    text = CharFilter(
+        field_name='text',
+        label='Текст',
+        lookup_expr='icontains',
+        widget=TextInput(
+            attrs={'type': 'text',
+                   'class': "form-control",
+                   'placeholder': "По тексту отклика...",
+                   },
         ),
     )
 
     class Meta:
         model = Reply
-        fields = ['post__author',
-                  'text',
+        fields = ['text',
                   'create_date',
                   'status',
-                  'type',
+                  'post_title',
                   ]

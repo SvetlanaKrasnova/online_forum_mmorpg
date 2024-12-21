@@ -5,6 +5,7 @@
 {% block title %}
 Подтверждение адреса электронной почты
 {% endblock title %}
+
 {% block content %}
 <div class="discover-items item-details-page">
     <div class="container">
@@ -22,25 +23,23 @@
         <div class="col-lg-7">
           <div class="col-lg-7">
             <form id="contact" action="{% url 'account_email_verification_sent' %}" method="post">
-
               <div slot="body">
                   {% csrf_token %}
                   {% element fields form=form unlabeled=True %}
                   {% endelement %}
                   {{ redirect_field }}
               </div>
-
               <div slot="actions">
                 {% element button type="submit" tags="prominent,confirm" %}
                     {% translate "Confirm" %}
                 {% endelement %}
                 {% if cancel_url %}
                     {% element button href=cancel_url tags="link,cancel" %}
-                        {% translate "Cancel" %}
+                        {% translate "Назад" %}
                     {% endelement %}
                 {% else %}
                     {% element button type="submit" form="logout-from-stage" tags="link,cancel" %}
-                        {% translate "Cancel" %}
+                        {% translate "Назад" %}
                     {% endelement %}
                 {% endif %}
             </div>

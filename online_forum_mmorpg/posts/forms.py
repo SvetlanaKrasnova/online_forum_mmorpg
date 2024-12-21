@@ -58,7 +58,7 @@ class ReplyChengeStatusForm(ModelForm):
                 ("delete", "Удалить"),
                 ("default", "Не выбрано"),
             ],
-            attrs={"class": "form-select"},
+            attrs={"class": "form-select", 'onchange': 'submit();'},
         ),
     )
 
