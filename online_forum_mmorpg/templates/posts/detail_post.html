@@ -34,21 +34,23 @@
         </div>
         {% if request.user.is_authenticated %}
           {% if 'post' in request.get_full_path %}
-            <form method="POST" role="search">
-                {% csrf_token %}
-                <div id="contact" class="item" style="margin-top: 0px; padding: 30px 30px; width: 100%; max-width: 100%">
-                    <span class="bid">
-                      <strong>О</strong>ставить отклик<br>
-                    </span>
-                    <div class="line-dec"></div>
-                    <textarea name="text" placeholder="Оставить отклик..." autocomplete="on" required style="border-radius: 10px;"> </textarea>
-                  <span class="ends">
-                    <button type="submit" id="form-submit" class="orange-button">Опубликовать</button>
-                  </span>
-                </div>
-            </form>
+            {% if request.user != post.author %}
+                <form method="POST" role="search">
+                    {% csrf_token %}
+                    <div id="contact" class="item" style="margin-top: 0px; padding: 30px 30px; width: 100%; max-width: 100%">
+                        <span class="bid">
+                          <strong>О</strong>ставить отклик<br>
+                        </span>
+                        <div class="line-dec"></div>
+                        <textarea name="text" placeholder="Оставить отклик..." autocomplete="on" required style="border-radius: 10px;"> </textarea>
+                      <span class="ends">
+                        <button type="submit" id="form-submit" class="orange-button">Опубликовать</button>
+                      </span>
+                    </div>
+                </form>
+            {% endif %}
           {% endif %}
-          {% else %}
+        {% else %}
             <div id="contact" class="item" style="margin-top: 0px; padding: 30px 30px; width: 100%; max-width: 100%">
                 <span class="bid">
                   Добавлять отклик могут только зарегистрированные пользователи.<br>
@@ -58,7 +60,7 @@
                   <a href="{% url 'account_login' %}">Вход</a>
                 </div>
             </div>
-          {% endif %}
+        {% endif %}
       </div>
     </div>
   </div>

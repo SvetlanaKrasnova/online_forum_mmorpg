@@ -9,7 +9,7 @@ from django.urls import reverse_lazy
 
 
 # Create your views here.
-class PostList(ListView):
+class PostList(LoginRequiredMixin, ListView):
     """
     Показывает все объявления
     """

@@ -43,27 +43,3 @@ class ReplyForm(ModelForm):
         fields = [
             'text',
         ]
-
-
-class ReplyChengeStatusForm(ModelForm):
-    """
-    Для принятия/отклонения статуса на личной страничке пользователя
-    """
-    status = CharField(
-        initial="default",
-        widget=Select(
-            choices=[
-                ('approved', "Принять"),
-                ("rejected", "Отклонить"),
-                ("delete", "Удалить"),
-                ("default", "Не выбрано"),
-            ],
-            attrs={"class": "form-select", 'onchange': 'submit();'},
-        ),
-    )
-
-    class Meta:
-        model = Reply
-        fields = [
-            'status',
-        ]

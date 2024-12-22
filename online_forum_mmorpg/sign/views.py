@@ -5,7 +5,6 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from posts.models import Post, Reply
 from news.models import News
 from posts.filters import ReplyFilter
-from posts.forms import ReplyChengeStatusForm
 
 
 # Create your views here.
@@ -20,13 +19,12 @@ class Profile(LoginRequiredMixin, ListView):
 
     def get_queryset(self):
         queryset = super().get_queryset()
-        self.filter_replys = ReplyFilter(self.request.GET, queryset.filter(post__author=self.request.user))  # TODO
+        self.filter_replys = ReplyFilter(self.request.GET, queryset.filter(post__author=self.request.user))
         return self.filter_replys.qs
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['filter_replys'] = self.filter_replys
-        context['form_chenge_status_reply'] = ReplyChengeStatusForm()
 
         # Количество откликов пользователя
         context['col_my_reply'] = Reply.objects.filter(user=self.request.user).count
