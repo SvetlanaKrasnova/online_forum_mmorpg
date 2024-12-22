@@ -8,9 +8,9 @@ from django_summernote.admin import SummernoteModelAdmin
 class NewsAdmin(SummernoteModelAdmin):
     model = News
     summernote_fields = ('text',)
-    list_display = ["title", "create_date", "text", "author"]
-    list_filter = ('title', 'create_date', 'text', 'author')
-    search_fields = ('title', 'create_date', 'text', 'author')
+    list_display = ["title", "author_id", "create_date", "author"]
+    list_filter = ('title', 'author_id', 'create_date', 'text', 'author')
+    search_fields = ('title', 'author_id', 'create_date', 'text', 'author')
 
 
 # Register your models here.
