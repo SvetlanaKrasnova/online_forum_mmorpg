@@ -1,10 +1,11 @@
 from django.core.cache import cache
 from django.shortcuts import redirect
-from django.views.generic import ListView, CreateView, DetailView
+from django.views.generic import ListView, CreateView, DetailView, UpdateView, DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from .models import Post
 from .forms import PostForm, ReplyForm
 from .filters import PostFilter
+from django.urls import reverse_lazy
 
 
 # Create your views here.
@@ -30,6 +31,16 @@ class PostList(ListView):
         context = super().get_context_data(**kwargs)
         context['filter_posts'] = self.filter_posts
         return context
+
+
+class PostEdit(PermissionRequiredMixin, LoginRequiredMixin, UpdateView):
+    """
+    Редактирование объявления
+    """
+    permission_required = ('posts.change_post',)
+    form_class = PostForm
+    model = Post
+    template_name = 'create_post.html'
 
 
 class PostCreate(PermissionRequiredMixin, LoginRequiredMixin, CreateView):
@@ -78,3 +89,12 @@ class PostDetail(LoginRequiredMixin, DetailView):
             cache.set(f'post-{self.kwargs["pk"]}', obj)
 
         return obj
+
+
+class PostDelete(PermissionRequiredMixin, LoginRequiredMixin, DeleteView):
+    """
+    Удаление публикации
+    """
+    permission_required = ('posts.delete_post',)
+    model = Post
+    success_url = reverse_lazy('profile')
