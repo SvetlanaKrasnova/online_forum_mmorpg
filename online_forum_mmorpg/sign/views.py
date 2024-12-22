@@ -3,6 +3,7 @@ from django.shortcuts import redirect
 from django.views.generic import ListView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from posts.models import Post, Reply
+from news.models import News
 from posts.filters import ReplyFilter
 from posts.forms import ReplyChengeStatusForm
 
@@ -57,6 +58,11 @@ class MainPage(ListView):
     """
     Главная страница портала
     """
-    model = Post
+    model = News
     template_name = 'main_page.html'
-    context_object_name = 'news'
+    context_object_name = 'last_news'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['last_news'] = News.objects.all().order_by("-create_date")[:4]
+        return context
