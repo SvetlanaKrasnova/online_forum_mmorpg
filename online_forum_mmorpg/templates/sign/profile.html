@@ -33,19 +33,30 @@
         </div>
         <div class="col-lg-6">
           <div class="author">
-            <img src="/static/assets/images/single-author2.jpg" alt="" style="border-radius: 50%; max-width: 170px;">
-            <h4>{{ request.user.first_name }} {{ request.user.last_name }}
+            {% if request.user.profile.avatar.path %}
+              <img src="{{ request.user.profile.avatar.url }}" alt="" style="border-radius: 50%; max-width: 170px; max-height: 170px;">
+            {% else %}
+              <img src="/static/assets/images/single-author2.jpg" alt="" style="border-radius: 50%; max-width: 170px; max-height: 170px;">
+            {% endif %}
+            <h4 style="margin-top: 20px">{{ request.user.profile }}
               <br> <a href="#">{{ request.user.email }}</a>
-              <br><br><a href="#">Изменить фото профиля</a>
-            </h4>
+              <form id="delete_post" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                <input type="hidden" value="1" name="change_avatar">
+                {{ profile_form.avatar }}
+                <div class="col-lg-6">
+                  <button style="margin-top: 20px"type="submit">Изменить</button>
+                </div>
+              </form>
+              </h4>
           </div>
         </div>
         <div class="col-lg-6">
           <div class="right-info">
             <div class="row">
-              <div class="col-4">
+              <div class="col-3">
                 <div class="info-item">
-                  <i class="fa fa-chevron-circle-up"></i>
+                  <i class="fa fa-check"></i>
                   <h6>{{ col_my_reply }} <em>Откликов</em></h6>
                 </div>
               </div>
@@ -55,10 +66,10 @@
                   <h6>{{ col_my_posts }} <em>Объявлений</em></h6>
                 </div>
               </div>
-              <div class="col-4">
+              <div class="col-5">
                 <div class="info-item">
-                  <i class="fa fa-dollar"></i>
-                  <h6>{{ col_active_posts }} <em>Активные</em></h6>
+                  <i class="fa fa-eye"></i>
+                  <h6>{{ col_active_posts }} <em>Активные отклики</em></h6>
                 </div>
               </div>
             </div>

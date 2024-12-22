@@ -56,8 +56,12 @@
               <div class="right-content">
                 <h4>{{ post.title }} ({{ post.create_date|date:'l d, M' }})</h4>
                 <span class="author">
-                  <img src="/static/assets/images/author.jpg" alt="" style="max-width: 50px; border-radius: 50%;">
-                  <h6>{{ post.author.first_name }} {{ post.author.last_name }}<br><a>@{{ post.author.email|get_nike }}</a></h6>
+                  {% if post.author.profile.avatar.path %}
+                    <img src="{{ post.author.profile.avatar.url }}" alt="" style="max-width: 50px; max-height: 50px; border-radius: 50%;">
+                  {% else %}
+                    <img src="/static/assets/images/single-author2.jpg" alt="" style="max-width: 50px; max-height: 50px; border-radius: 50%;">
+                  {% endif %}
+                  <h6>{{ post.author.profile }} <br><a>@{{ post.author.email|get_nike }}</a></h6>
                 </span>
                 <div class="line-dec"></div>
                 <span class="bid">

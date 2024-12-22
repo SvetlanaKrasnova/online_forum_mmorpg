@@ -1,6 +1,7 @@
 from allauth.account.forms import SignupForm, LoginForm, PasswordField
 from django.contrib.auth.models import Group
 from django import forms
+from .models import Profile
 
 
 class BasicLoginForm(LoginForm):
@@ -37,3 +38,12 @@ class BasicSignupForm(SignupForm):
         newsletter_group.user_set.add(user)
 
         return user
+
+
+class UpdateProfileForm(forms.ModelForm):
+    avatar = forms.ImageField(widget=forms.FileInput(attrs={
+        'style': "margin-top: 20px; font-size: 15px; color: #7453fc; font-family: 'Roboto', sans-serif; font-weight: bold;"}))
+
+    class Meta:
+        model = Profile
+        fields = ['avatar']

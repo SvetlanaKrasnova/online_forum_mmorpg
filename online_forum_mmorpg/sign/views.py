@@ -5,10 +5,11 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from posts.models import Post, Reply
 from news.models import News
 from posts.filters import ReplyFilter
+from .forms import UpdateProfileForm
 
 
 # Create your views here.
-class Profile(LoginRequiredMixin, ListView):
+class ProfileView(LoginRequiredMixin, ListView):
     """
     Страница профиля (личный кабинет)
     """
@@ -35,20 +36,25 @@ class Profile(LoginRequiredMixin, ListView):
         context['col_active_posts'] = Reply.objects.filter(status='new', post__author=self.request.user).count
 
         context['my_posts'] = my_posts
+        context['profile_form'] = UpdateProfileForm()
         return context
 
     def post(self, request, *args, **kwargs):
         status = request.POST.get("status_reply")
-        id_reply = request.POST.get("id_reply")
-        if status == 'remove':
-            Reply.objects.get(id=id_reply).delete()
-        elif status == 'default':
-            pass
+        if request.POST.get('change_avatar'):
+            profile_form = UpdateProfileForm(request.POST, request.FILES, instance=request.user.profile)
+            if profile_form.is_valid():
+                profile_form.save()
         else:
-            r = Reply.objects.get(id=id_reply)
-            r.status = status
-            r.save()
-
+            id_reply = request.POST.get("id_reply")
+            if status == 'remove':
+                Reply.objects.get(id=id_reply).delete()
+            elif status == 'default':
+                pass
+            else:
+                r = Reply.objects.get(id=id_reply)
+                r.status = status
+                r.save()
         return redirect('profile')
 
 
