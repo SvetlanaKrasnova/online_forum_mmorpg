@@ -1486,7 +1486,8 @@ Explore Style
 
 .discover-items #search-form button,
 .discover-items #change_status_reply button,
-.discover-items #delete_post button {
+.discover-items #delete_post button,
+.discover-items #add_file button {
   font-size: 14px;
   color: #fff;
   background-color: #7453fc;
@@ -1507,7 +1508,8 @@ Explore Style
 
 .discover-items #search-form button:after,
 .discover-items #change_status_reply button:after,
-.discover-items #delete_post button:after {
+.discover-items #delete_post button:after,
+.discover-items #add_file button:after {
   width: 78%;
   height: 2px;
   background-color: #fff;
@@ -1520,7 +1522,8 @@ Explore Style
 
 .discover-items #search-form button:hover,
 .discover-items #change_status_reply button:hover,
-.discover-items #delete_post button:hover {
+.discover-items #delete_post button:hover,
+.discover-items #add_file button:hover {
   background-color: #fff;
   color: #7453fc;
   border: 1px solid #fff;

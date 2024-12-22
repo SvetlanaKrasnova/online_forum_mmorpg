@@ -40,15 +40,15 @@
             {% endif %}
             <h4 style="margin-top: 20px">{{ request.user.profile }}
               <br> <a href="#">{{ request.user.email }}</a>
-              <form id="delete_post" method="post" enctype="multipart/form-data">
+              <form id="add_file" method="post" enctype="multipart/form-data">
                 {% csrf_token %}
                 <input type="hidden" value="1" name="change_avatar">
                 {{ profile_form.avatar }}
                 <div class="col-lg-6">
-                  <button style="margin-top: 20px"type="submit">Изменить</button>
+                  <button style="margin-top: 20px" type="submit">Изменить</button>
                 </div>
               </form>
-              </h4>
+            </h4>
           </div>
         </div>
         <div class="col-lg-6">
