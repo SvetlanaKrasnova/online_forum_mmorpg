@@ -17,6 +17,7 @@ class PostList(LoginRequiredMixin, ListView):
     ordering = '-create_date'
     template_name = 'posts.html'
     context_object_name = 'posts'
+    paginate_by = 10
 
     def get_queryset(self):
         """

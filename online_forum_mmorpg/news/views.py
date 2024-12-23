@@ -1,4 +1,3 @@
-from django.shortcuts import render
 from django.core.cache import cache
 from django.views.generic import ListView, DetailView
 from .models import News
@@ -14,6 +13,7 @@ class NewsList(ListView):
     ordering = '-create_date'
     template_name = 'posts.html'
     context_object_name = 'posts'
+    paginate_by = 10
 
     def get_queryset(self):
         queryset = super().get_queryset()
