@@ -17,11 +17,11 @@ class PostForm(ModelForm):
     )
 
     category = CharField(
-        initial="Не выбрано",
-        label="Категория",
+        initial='Не выбрано',
+        label='Категория',
         widget=Select(
             choices=Post.CATEGORIES,
-            attrs={"class": "form-select", "name": "category"},
+            attrs={'class': 'form-select', 'name': 'category'},
         ),
     )
 

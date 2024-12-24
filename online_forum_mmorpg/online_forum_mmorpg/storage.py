@@ -1,14 +1,15 @@
 import os
+from datetime import datetime
 from django.core.files.storage import FileSystemStorage
 from django.conf import settings
 from urllib.parse import urljoin
-from datetime import datetime
 
 
 class CkeditorCustomStorage(FileSystemStorage):
     """
     Кастомное расположение для медиа файлов редактора
     """
+
     def get_folder_name(self):
         return datetime.now().strftime('%Y_%m_%d')
 

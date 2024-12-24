@@ -18,7 +18,6 @@ load_dotenv(find_dotenv())
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
@@ -28,8 +27,7 @@ SECRET_KEY = 'django-insecure-*dm$*5&n#o1p02glf*+9q3ktj^qv03h^qo%=dfwb9^iz-p47s=
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["127.0.0.1"]
-
+ALLOWED_HOSTS = ['127.0.0.1']
 
 # Application definition
 
@@ -66,9 +64,9 @@ SERVER_EMAIL = os.getenv('SERVER_EMAIL')
 EMAIL_ADMIN = os.getenv('EMAIL_ADMIN')
 
 SITE_ID = 1
-SITE_URL = f'http://127.0.0.1:8000'
+SITE_URL = 'http://127.0.0.1:8000'
 
-CELERY_BROKER_URL = f'redis://127.0.0.1:6379'
+CELERY_BROKER_URL = 'redis://127.0.0.1:6379'
 CELERY_RESULT_BACKEND = 'redis://127.0.0.1:6379'
 REDIS_BROKER_HOST = '127.0.0.1'
 REDIS_BROKER_PORT = '6379'
@@ -92,8 +90,8 @@ CACHES = {
         'BACKEND': 'django.core.cache.backends.filebased.FileBasedCache',
         'LOCATION': os.path.join(BASE_DIR, 'cache_files'),
         'OPTIONS': {
-                    'MAX_ENTRIES': 100
-                }
+            'MAX_ENTRIES': 100
+        }
     }
 }
 
@@ -152,7 +150,6 @@ DATABASES = {
     }
 }
 
-
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
 
@@ -171,7 +168,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/4.2/topics/i18n/
 
@@ -182,7 +178,6 @@ TIME_ZONE = 'UTC'
 USE_I18N = True
 
 USE_TZ = True
-
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
@@ -316,5 +311,5 @@ LOGGING = {
             'handlers': ['file_security'],
             'propagate': True,
         },
-    }
+    },
 }

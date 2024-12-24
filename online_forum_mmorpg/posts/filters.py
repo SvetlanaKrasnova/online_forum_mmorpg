@@ -13,10 +13,10 @@ class PostFilter(FilterSet):
         lookup_expr='icontains',
         widget=TextInput(
             attrs={'type': 'text',
-                   'class': "form-control",
-                   'placeholder': "Введите поисковый запрос...",
-                   'aria-label': "Введите поисковый запрос...",
-                   'aria-describedby': "button-search",
+                   'class': 'form-control',
+                   'placeholder': 'Введите поисковый запрос...',
+                   'aria-label': 'Введите поисковый запрос...',
+                   'aria-describedby': 'button-search',
                    },
         ),
     )
@@ -26,7 +26,7 @@ class PostFilter(FilterSet):
         label='Поиск по категории объявления',
         choices=Post.CATEGORIES,
         widget=Select(
-            attrs={"class": "form-control"},
+            attrs={'class': 'form-control'},
         ),
     )
 
@@ -36,10 +36,10 @@ class PostFilter(FilterSet):
         lookup_expr='icontains',
         widget=TextInput(
             attrs={'type': 'text',
-                   'class': "form-control",
-                   'placeholder': "Введите поисковый запрос...",
-                   'aria-label': "Введите поисковый запрос...",
-                   'aria-describedby': "button-search",
+                   'class': 'form-control',
+                   'placeholder': 'Введите поисковый запрос...',
+                   'aria-label': 'Введите поисковый запрос...',
+                   'aria-describedby': 'button-search',
                    },
         ),
     )
@@ -60,12 +60,12 @@ class ReplyFilter(FilterSet):
         field_name='status',
         label='Поиск по статусам откликов',
         choices=[
-            ('approved', "Принятые"),
-            ("rejected", "Отклоненные"),
-            ("new", "Новые"),
+            ('approved', 'Принятые'),
+            ('rejected', 'Отклоненные'),
+            ('new', 'Новые'),
         ],
         widget=Select(
-            attrs={"class": "form-control"},
+            attrs={'class': 'form-control'},
         ),
     )
 
@@ -75,8 +75,8 @@ class ReplyFilter(FilterSet):
         lookup_expr='icontains',
         widget=TextInput(
             attrs={'type': 'text',
-                   'class': "form-control",
-                   'placeholder': "По тексту объявления...",
+                   'class': 'form-control',
+                   'placeholder': 'По заголовку объявления...',
                    },
         ),
     )
@@ -86,8 +86,8 @@ class ReplyFilter(FilterSet):
         lookup_expr='icontains',
         widget=TextInput(
             attrs={'type': 'text',
-                   'class': "form-control",
-                   'placeholder': "По тексту отклика...",
+                   'class': 'form-control',
+                   'placeholder': 'По тексту отклика...',
                    },
         ),
     )

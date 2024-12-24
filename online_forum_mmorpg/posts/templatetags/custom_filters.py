@@ -8,7 +8,7 @@ register = template.Library()
 
 @register.filter()
 def get_nike(user_email):
-    return user_email.split("@")[0]
+    return user_email.split('@')[0]
 
 
 @register.filter()

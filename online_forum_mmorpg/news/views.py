@@ -33,7 +33,7 @@ class NewsDetail(DetailView):
     model = News
     template_name = 'detail_post.html'
     context_object_name = 'post'
-    pk_url_kwarg = "pk"
+    pk_url_kwarg = 'pk'
 
     def get_object(self, *args, **kwargs):
         obj = cache.get(f'news-{self.kwargs["pk"]}', None)

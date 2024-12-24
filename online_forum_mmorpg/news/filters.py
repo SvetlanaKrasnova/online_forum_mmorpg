@@ -13,21 +13,21 @@ class NewsFilter(FilterSet):
         lookup_expr='icontains',
         widget=TextInput(
             attrs={'type': 'text',
-                   'class': "form-control",
-                   'placeholder': "Введите поисковый запрос...",
-                   'aria-label': "Введите поисковый запрос...",
-                   'aria-describedby': "button-search",
+                   'class': 'form-control',
+                   'placeholder': 'Введите поисковый запрос...',
+                   'aria-label': 'Введите поисковый запрос...',
+                   'aria-describedby': 'button-search',
                    },
         ),
     )
 
     create_date__gt = DateFilter(
-        field_name="create_date",
-        label="От даты",
+        field_name='create_date',
+        label='От даты',
         lookup_expr='gt',
         widget=DateInput(
             attrs={'type': 'date',
-                   'class': "form-control",
+                   'class': 'form-control',
                    },
         ),
     )

@@ -21,12 +21,12 @@ class ProfileView(LoginRequiredMixin, ListView):
 
     def get_queryset(self):
         queryset = super().get_queryset()
-        self.filter_replys = ReplyFilter(self.request.GET, queryset.filter(post__author=self.request.user))
-        return self.filter_replys.qs
+        self.filter_replies = ReplyFilter(self.request.GET, queryset.filter(post__author=self.request.user))
+        return self.filter_replies.qs
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['filter_replys'] = self.filter_replys
+        context['filter_replies'] = self.filter_replies
 
         # Количество откликов пользователя
         context['col_my_reply'] = Reply.objects.filter(user=self.request.user).count
@@ -41,13 +41,13 @@ class ProfileView(LoginRequiredMixin, ListView):
         return context
 
     def post(self, request, *args, **kwargs):
-        status = request.POST.get("status_reply")
+        status = request.POST.get('status_reply')
         if request.POST.get('change_avatar'):
             profile_form = UpdateProfileForm(request.POST, request.FILES, instance=request.user.profile)
             if profile_form.is_valid():
                 profile_form.save()
         else:
-            id_reply = request.POST.get("id_reply")
+            id_reply = request.POST.get('id_reply')
             if status == 'remove':
                 Reply.objects.get(id=id_reply).delete()
             elif status == 'default':
@@ -69,5 +69,5 @@ class MainPage(ListView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['last_news'] = News.objects.all().order_by("-create_date")[:4]
+        context['last_news'] = News.objects.all().order_by('-create_date')[:4]
         return context

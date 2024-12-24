@@ -3,11 +3,11 @@ import logging
 import json
 from datetime import datetime, timedelta
 from celery import shared_task
-from news.models import News
 from django.template.loader import render_to_string
-from django.contrib.auth.models import User
 from django.conf import settings
-from online_forum_mmorpg.utils import send_email_notification
+from django.contrib.auth.models import User
+from news.models import News
+from online_forum_mmorpg.utils.notification import send_email_notification
 
 logger = logging.getLogger(__name__)
 
@@ -36,16 +36,20 @@ def notify_week_posts() -> None:
         'news': news,
     })
 
-    for email in users_emails:
+    for user in users_emails:
         send_email_task.apply_async([{
-            "subject": "Новости за неделю",
-            "html_content": msg_html,
-            "to": [email]
+            'subject': 'Новости за неделю',
+            'html_content': msg_html,
+            'to': [user['email']],
         }], countdown=1)
 
 
 @shared_task
 def clear_task_redis():
+    """
+    Задача на чистку тасков
+    :return:
+    """
     red = redis.Redis(
         host=settings.REDIS_BROKER_HOST,
         port=settings.REDIS_BROKER_PORT
@@ -58,7 +62,7 @@ def clear_task_redis():
 
             task = json.loads(red.get(k))
             if task.get('date_done', None):
-                date_done = datetime.strptime(task['date_done'], "%Y-%m-%dT%H:%M:%S.%f+00:00")
+                date_done = datetime.strptime(task['date_done'], '%Y-%m-%dT%H:%M:%S.%f+00:00')
                 if date_done <= datetime.now() - timedelta(minutes=10):
                     red.delete(k)
         except Exception as e:

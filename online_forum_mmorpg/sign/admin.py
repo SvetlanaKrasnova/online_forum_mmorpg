@@ -6,7 +6,7 @@ from .models import Profile
 class ProfileAdmin(admin.ModelAdmin):
     model = Profile
     summernote_fields = ('description',)
-    list_display = ["user", "user_id", "avatar",]
+    list_display = ['user', 'user_id', 'avatar',]
     list_filter = ('user',)
     search_fields = ('user__first_name', 'user__last_name',)
 

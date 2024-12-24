@@ -5,6 +5,9 @@ from PIL import Image
 
 # Create your models here.
 class Profile(models.Model):
+    """
+    Пользователь
+    """
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     avatar = models.ImageField(default='default_avatar/single-author.jpg', upload_to='profile_images')
 

@@ -1,11 +1,11 @@
 from django.core.cache import cache
 from django.shortcuts import redirect
+from django.urls import reverse_lazy
 from django.views.generic import ListView, CreateView, DetailView, UpdateView, DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from .models import Post
 from .forms import PostForm, ReplyForm
 from .filters import PostFilter
-from django.urls import reverse_lazy
 
 
 # Create your views here.
@@ -67,7 +67,7 @@ class PostDetail(LoginRequiredMixin, DetailView):
     model = Post
     template_name = 'detail_post.html'
     context_object_name = 'post'
-    pk_url_kwarg = "pk"
+    pk_url_kwarg = 'pk'
 
     def post(self, request, *args, **kwargs):
         post = self.get_object()

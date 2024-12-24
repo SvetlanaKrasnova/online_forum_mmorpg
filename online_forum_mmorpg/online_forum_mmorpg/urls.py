@@ -16,15 +16,14 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from sign.views import MainPage
-from django.conf.urls.static import static
 from django.conf import settings
+from django.conf.urls.static import static
+from sign.views import MainPage
 
 urlpatterns = [
     path('summernote/', include('django_summernote.urls')),
     path('admin/', admin.site.urls),
     path('accounts/', include('allauth.urls')),
-    path('admin/', admin.site.urls),
     path('', MainPage.as_view(), name='basic'),
     path('sign/', include('sign.urls')),
     path('posts/', include('posts.urls')),

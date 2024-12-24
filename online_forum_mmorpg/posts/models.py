@@ -3,10 +3,11 @@ from django.contrib.auth.models import User
 from django.urls import reverse
 
 STATUSES_REPLY = [
-    ('approved', "Принят"),
-    ("rejected", "Отклонен"),
-    ("new", "Новый"),
+    ('approved', 'Принят'),
+    ('rejected', 'Отклонен'),
+    ('new', 'Новый'),
 ]
+
 
 # Create your models here.
 class Post(models.Model):
@@ -14,16 +15,16 @@ class Post(models.Model):
     Объявление
     """
     CATEGORIES = [
-        ('tank', "Танки"),
-        ("hilt", "Хилы"),
-        ("dd", "ДД"),
-        ("traders", 'Торговцы'),
-        ("guild_master", 'Гилдмастеры'),
-        ("questgiver", 'Квестгиверы'),
-        ("blacksmith", 'Кузнецы'),
-        ("tanner", 'Кожевники'),
-        ("potion_maker", 'Зельевары'),
-        ("spellmaster", 'Мастера заклинаний'),
+        ('tank', 'Танки'),
+        ('hilt', 'Хилы'),
+        ('dd', 'ДД'),
+        ('traders', 'Торговцы'),
+        ('guild_master', 'Гилдмастеры'),
+        ('questgiver', 'Квестгиверы'),
+        ('blacksmith', 'Кузнецы'),
+        ('tanner', 'Кожевники'),
+        ('potion_maker', 'Зельевары'),
+        ('spellmaster', 'Мастера заклинаний'),
     ]
     title = models.CharField(max_length=150)
     create_date = models.DateTimeField(auto_now_add=True)
@@ -33,8 +34,8 @@ class Post(models.Model):
     author = models.ForeignKey(User, on_delete=models.CASCADE)
 
     class Meta:
-        verbose_name = "Объявление"
-        verbose_name_plural = "Объявления"
+        verbose_name = 'Объявление'
+        verbose_name_plural = 'Объявления'
 
     def __str__(self):
         return self.title.title()
@@ -53,11 +54,11 @@ class Reply(models.Model):
     create_date = models.DateTimeField(auto_now_add=True)
     status = models.CharField(max_length=35,
                               choices=STATUSES_REPLY,
-                              default="new")
+                              default='new')
 
     class Meta:
-        verbose_name = "Отклик"
-        verbose_name_plural = "Отклики"
+        verbose_name = 'Отклик'
+        verbose_name_plural = 'Отклики'
 
     def get_absolute_url(self):
         return reverse('detail_post', kwargs={'pk': self.post.pk})
