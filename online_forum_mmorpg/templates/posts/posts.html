@@ -53,7 +53,7 @@
           {% for post in posts %}
             <div class="item">
               <div class="right-content">
-                <h4>{{ post.title }} ({{ post.create_date|date:'l d, M' }}) [post.]</h4>
+                <h4>{{ post.title }} от {{ post.create_date|date:'l d, M' }} | {{ post.category|convert_category}}</h4>
                 <span class="author">
                   {% if post.author.profile.avatar.path %}
                     <img src="{{ post.author.profile.avatar.url }}" alt="" style="max-width: 50px; max-height: 50px; border-radius: 50%;">

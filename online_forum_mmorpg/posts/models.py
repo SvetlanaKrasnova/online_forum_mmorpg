@@ -8,24 +8,25 @@ STATUSES_REPLY = [
     ('new', 'Новый'),
 ]
 
+CATEGORIES = [
+    ('tank', 'Танки'),
+    ('hilt', 'Хилы'),
+    ('dd', 'ДД'),
+    ('traders', 'Торговцы'),
+    ('guild_master', 'Гилдмастеры'),
+    ('questgiver', 'Квестгиверы'),
+    ('blacksmith', 'Кузнецы'),
+    ('tanner', 'Кожевники'),
+    ('potion_maker', 'Зельевары'),
+    ('spellmaster', 'Мастера заклинаний'),
+]
+
 
 # Create your models here.
 class Post(models.Model):
     """
     Объявление
     """
-    CATEGORIES = [
-        ('tank', 'Танки'),
-        ('hilt', 'Хилы'),
-        ('dd', 'ДД'),
-        ('traders', 'Торговцы'),
-        ('guild_master', 'Гилдмастеры'),
-        ('questgiver', 'Квестгиверы'),
-        ('blacksmith', 'Кузнецы'),
-        ('tanner', 'Кожевники'),
-        ('potion_maker', 'Зельевары'),
-        ('spellmaster', 'Мастера заклинаний'),
-    ]
     title = models.CharField(max_length=150)
     create_date = models.DateTimeField(auto_now_add=True)
     description = models.TextField()

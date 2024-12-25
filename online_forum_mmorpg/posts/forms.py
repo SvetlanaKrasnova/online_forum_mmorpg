@@ -1,5 +1,5 @@
 from django.forms import ModelForm, TextInput, CharField, Select
-from .models import Post, Reply
+from .models import Post, Reply, CATEGORIES
 from django_summernote.widgets import SummernoteWidget
 
 
@@ -20,7 +20,7 @@ class PostForm(ModelForm):
         initial='Не выбрано',
         label='Категория',
         widget=Select(
-            choices=Post.CATEGORIES,
+            choices=CATEGORIES,
             attrs={'class': 'form-select', 'name': 'category'},
         ),
     )

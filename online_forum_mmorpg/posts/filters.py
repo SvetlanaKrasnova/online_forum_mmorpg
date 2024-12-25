@@ -1,6 +1,6 @@
 from django_filters import FilterSet, CharFilter, ChoiceFilter
 from django.forms import Select, TextInput
-from posts.models import Post, Reply
+from posts.models import Post, Reply, CATEGORIES
 
 
 class PostFilter(FilterSet):
@@ -24,7 +24,7 @@ class PostFilter(FilterSet):
     category = ChoiceFilter(
         field_name='category',
         label='Поиск по категории объявления',
-        choices=Post.CATEGORIES,
+        choices=CATEGORIES,
         widget=Select(
             attrs={'class': 'form-control'},
         ),
