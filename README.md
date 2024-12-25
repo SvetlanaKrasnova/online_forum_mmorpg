@@ -131,7 +131,7 @@ e-mail с оповещением о нём. Также пользователю 
 **EMAIL_HOST_USER** \
 **EMAIL_HOST_PASSWORD** \
 **SERVER_EMAIL** \
-**EMAIL_ADMIN** \
+**EMAIL_ADMIN**
 
 ## Файловая структура проекта
 ~~~python
