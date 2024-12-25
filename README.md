@@ -55,20 +55,20 @@ e-mail с оповещением о нём. Также пользователю 
 
 
 #### Главная страница и Новости
-![main_page](files_readme/main_page.png)
-![main_page_news](files_readme/main_page_news.png)
+<img src="files_readme/main_page.png" alt="main_page" width="75%"/>
+<img src="files_readme/main_page_news.png" alt="main_page_news" width="75%"/>
 
 
 #### Раздел c Объявлениями
-![posts](files_readme/posts.png)
+<img src="files_readme/posts.png" alt="posts" width="75%"/>
 
 #### Личный кабинет. Возможности
-![profile_main](files_readme/profile_main.png)
+<img src="files_readme/profile_main.png" alt="profile_main" width="75%"/>
 
 Пользователю доступна загрузка фото профиля и 
 Рядам с ним есть "панель" в которой собрана небольшая статистика:
 
-![profile_statistics](files_readme/profile_statistics.png)
+<img src="files_readme/profile_statistics.png" alt="profile_statistics" width="60%"/>
 
 **Отклики** - Количество откликов, которые оставил пользователь \
 **Объявления** - Количество объявлений созданных пользователем \
@@ -80,20 +80,19 @@ e-mail с оповещением о нём. Также пользователю 
 По умолчанию отклики записываются в БД со статусом "Новый". Их можно принять, отклонить и удалить.
 >**Смена статуса происходит при нажатии на элемент из выподающего списка**
 
-
-![reply_action](files_readme/reply_action.png)
+<img src="files_readme/reply_action.png" alt="reply_action" width="50%"/>
 
 Посте принятия или отклонения будет доступно только 1 действие - удалить.
 
-![reply_action](files_readme/reply_action_after.png)
+<img src="files_readme/reply_action_after.png" alt="reply_action_after" width="50%"/>
 
 При нажатии на кнопку **"Смотреть отклик"** ниже отклика появится блок с автором отклика 
 и текст отклика.
 
-![button_text_reply](files_readme/button_text_reply.png)
+<img src="files_readme/button_text_reply.png" alt="button_text_reply" width="75%"/>
 
 #### Личный кабинет. Раздел с объявлениями
-![profile_my_posts](files_readme/profile_my_posts.png)
+<img src="files_readme/profile_my_posts.png" alt="profile_my_posts" width="75%"/>
 
 В данном разделе отображаются объявления созданные пользователем. \
 При нажатии на кнопку "Редактировать", произойдет переход в раздел, где можно будет отредактировать
@@ -127,7 +126,7 @@ e-mail с оповещением о нём. Также пользователю 
 `celery -A online_forum_mmorpg beat -l INFO`
 
 .env: \
-Необходимо прописать следующие настройки для отправки уведомлений:
+Необходимо прописать следующие настройки для отправки уведомлений: \
 **DEFAULT_FROM_EMAIL** \
 **EMAIL_HOST_USER** \
 **EMAIL_HOST_PASSWORD** \
