@@ -55,20 +55,20 @@ e-mail с оповещением о нём. Также пользователю 
 
 
 #### Главная страница и Новости
-<img src="files_readme/main_page.png" alt="main_page" width="75%"/>
-<img src="files_readme/main_page_news.png" alt="main_page_news" width="75%"/>
+![main_page](files_readme/main_page.png)
+![main_page_news](files_readme/main_page_news.png)
 
 
 #### Раздел c Объявлениями
-<img src="files_readme/posts.png" alt="posts" width="75%"/>
+![posts](files_readme/posts.png)
 
 #### Личный кабинет. Возможности
-<img src="files_readme/profile_main.png" alt="profile_main" width="75%"/>
+![profile_main](files_readme/profile_main.png)
 
 Пользователю доступна загрузка фото профиля и 
 Рядам с ним есть "панель" в которой собрана небольшая статистика:
 
-<img src="files_readme/profile_statistics.png" alt="profile_statistics" width="60%"/>
+![profile_statistics](files_readme/profile_statistics.png)
 
 **Отклики** - Количество откликов, которые оставил пользователь \
 **Объявления** - Количество объявлений созданных пользователем \
@@ -77,24 +77,23 @@ e-mail с оповещением о нём. Также пользователю 
 
 
 #### Личный кабинет. Отклики и что с ними можно делать
-По умолчанию отклики записываются в БД со статусом "Новый". Их можно принять, отклонить и удалить. \
-<span style="color:red">**!!!**</span>
-**Смена статуса происходит при нажатии на элемент из выподающего списка**
-<span style="color:red">**!!!**</span>
+По умолчанию отклики записываются в БД со статусом "Новый". Их можно принять, отклонить и удалить.
+>**Смена статуса происходит при нажатии на элемент из выподающего списка**
 
-<img src="files_readme/reply_action.png" alt="reply_action" width="50%"/>
+
+![reply_action](files_readme/reply_action.png)
 
 Посте принятия или отклонения будет доступно только 1 действие - удалить.
 
-<img src="files_readme/reply_action_after.png" alt="reply_action_after" width="50%"/>
+![reply_action](files_readme/reply_action_after.png)
 
 При нажатии на кнопку **"Смотреть отклик"** ниже отклика появится блок с автором отклика 
 и текст отклика.
 
-<img src="files_readme/button_text_reply.png" alt="button_text_reply" width="75%"/>
+![button_text_reply](files_readme/button_text_reply.png)
 
 #### Личный кабинет. Раздел с объявлениями
-<img src="files_readme/profile_my_posts.png" alt="profile_my_posts" width="75%"/>
+![profile_my_posts](files_readme/profile_my_posts.png)
 
 В данном разделе отображаются объявления созданные пользователем. \
 При нажатии на кнопку "Редактировать", произойдет переход в раздел, где можно будет отредактировать
@@ -128,12 +127,12 @@ e-mail с оповещением о нём. Также пользователю 
 `celery -A online_forum_mmorpg beat -l INFO`
 
 .env: \
-Необходимо прописать следующие настройки для отправки уведомлений: \
+Необходимо прописать следующие настройки для отправки уведомлений:
 **DEFAULT_FROM_EMAIL** \
 **EMAIL_HOST_USER** \
 **EMAIL_HOST_PASSWORD** \
 **SERVER_EMAIL** \
-**EMAIL_ADMIN** 
+**EMAIL_ADMIN** \
 
 ## Файловая структура проекта
 ~~~python
